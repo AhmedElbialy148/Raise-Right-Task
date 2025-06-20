@@ -17,6 +17,8 @@ export class NavbarComponent {
   }
 
   logout() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     this.store.dispatch(logout());
   }
 }
