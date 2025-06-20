@@ -1,0 +1,10 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.brand {
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}

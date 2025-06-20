@@ -1,0 +1,32 @@
+<div *ngIf="loading" class="message">Loading goal...</div>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<div *ngIf="!loading && goal" class="dashboard-container">
+  <!-- Parent Goal -->
+  <div class="goal-card">
+    <div class="goal-header">
+      <div class="goal-title">{{ goal.title }}</div>
+      <div class="goal-actions">
+        <!-- <button disabled>{{ goal.isPublic ? 'Public' : 'Private' }}</button> -->
+        <input type="date" [value]="formatDate(goal.deadline)" disabled />
+        <!-- <button disabled>Delete</button> -->
+      </div>
+    </div>
+    <div class="goal-description">{{ goal.description }}</div>
+
+    <!-- Child Goals -->
+    <div *ngIf="goal.children?.length" class="child-goals">
+      <div *ngFor="let child of goal.children" class="goal-card child-goal">
+        <div class="goal-header">
+          <div class="goal-title">- {{ child.title }}</div>
+          <div class="goal-actions">
+            <!-- <button disabled>{{ child.isPublic ? 'Public' : 'Private' }}</button> -->
+            <input type="date" [value]="formatDate(child.deadline)" disabled />
+            <!-- <button disabled>Delete</button> -->
+          </div>
+        </div>
+        <div class="goal-description">{{ child.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>

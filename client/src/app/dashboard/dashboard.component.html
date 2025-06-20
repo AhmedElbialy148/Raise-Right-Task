@@ -1,0 +1,113 @@
+<div *ngIf="loading" class="message">Loading goals...</div>
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+<div *ngIf="!loading && !errorMessage" class="dashboard-container">
+  <!-- Create Goal Form -->
+  <form #goalForm="ngForm" (ngSubmit)="createGoal()">
+    <div class="goal-form">
+      <h3>Create New Goal</h3>
+      
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          name="title"
+          [(ngModel)]="newGoal.title"
+          required
+          #titleRef="ngModel"
+          placeholder="Enter goal title"
+        />
+        <div class="error" *ngIf="titleRef.invalid && titleRef.touched">
+          Title is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          name="description"
+          [(ngModel)]="newGoal.description"
+          rows="3"
+          placeholder="Describe your goal"
+        ></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label>Deadline</label>
+        <input
+          type="date"
+          name="deadline"
+          [(ngModel)]="newGoal.deadline"
+        />
+      </div>
+  
+      <div class="form-group checkbox">
+        <label>
+          <input type="checkbox" name="isPublic" [(ngModel)]="newGoal.isPublic" />
+          Public
+        </label>
+      </div>
+  
+      <div class="form-group">
+        <label>Parent Goal (optional)</label>
+        <select name="parentId" [(ngModel)]="newGoal.parentId">
+          <option [ngValue]="null">None</option>
+          <option *ngFor="let goal of goals" [value]="goal.id">{{ goal.title }}</option>
+        </select>
+      </div>
+  
+      <button class="add-button" type="submit" [disabled]="goalForm.invalid">
+        Add Goal
+      </button>
+    </div>
+  </form>
+
+  <!-- Goals List -->
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let goal of goalsTree" cdkDrag class="goal-card">
+      <!-- Parent Goal -->
+      <div class="goal-header">
+        <div class="goal-title">{{ goal.title }}</div>
+        <div class="goal-actions">
+          <button (click)="toggleCompleted(goal)">
+            {{ goal.completed ? 'Mark Incomplete' : 'Mark Completed' }}
+          </button>
+          <button (click)="toggleVisibility(goal)">
+            {{ goal.isPublic ? 'Make Private' : 'Make Public' }}
+          </button>
+          <input
+            type="date"
+            [value]="formatDate(goal.deadline)"
+            (change)="updateDeadline(goal, $event)"
+          />
+          <button (click)="deleteGoal(goal.id)">Delete</button>
+        </div>
+      </div>
+      <div class="goal-description">{{ goal.description }}</div>
+  
+      <!-- Child Goals -->
+      <div *ngIf="goal.children?.length" class="child-goals">
+        <div *ngFor="let child of goal.children" class="goal-card child-goal">
+          <div class="goal-header">
+            <div class="goal-title">- {{ child.title }}</div>
+            <div class="goal-actions">
+              <button (click)="toggleCompleted(child)">
+                {{ child.completed ? 'Mark Incomplete' : 'Mark Completed' }}
+              </button>
+              <button (click)="toggleVisibility(child)">
+                {{ child.isPublic ? 'Make Private' : 'Make Public' }}
+              </button>
+              <input
+                type="date"
+                [value]="formatDate(child.deadline)"
+                (change)="updateDeadline(child, $event)"
+              />
+              <button (click)="deleteGoal(child.id)">Delete</button>
+            </div>
+          </div>
+          <div class="goal-description">{{ child.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

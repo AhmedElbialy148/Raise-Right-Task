@@ -1,0 +1,149 @@
+/* Container (optional if needed) */
+:host {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Create Goal Form */
+.goal-form {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  background-color: #fefefe;
+}
+
+.goal-form h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input[type='checkbox'] {
+  width: auto;
+  margin-right: 6px;
+}
+
+.goal-form button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.goal-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Goal Display */
+.goal-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.goal-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 12px;
+  flex: 1 1 auto;
+  word-break: break-word;
+}
+
+.goal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.goal-actions button {
+  background-color: #17a2b8;
+  color: #fff;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.goal-actions button:hover {
+  background-color: #117a8b;
+}
+
+.goal-actions input[type="date"] {
+  padding: 5px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Description */
+.goal-description {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #555;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Child Goals */
+.child-goals {
+  margin-top: 10px;
+  padding-left: 20px;
+  border-left: 2px solid #ddd;
+}
+
+.child-goal {
+  margin-top: 12px;
+}
+
+.child-goal .goal-card {
+  background-color: #f9f9f9;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-top: 4px;
+}

@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+  <div *ngFor="let goal of publicGoals" class="goal-card" (click)="viewGoal(goal)">
+    <div class="goal-header">
+      <div class="goal-title">{{ goal.title }}</div>
+      <div class="goal-actions">
+        <input type="date" [value]="formatDate(goal.deadline)" disabled />
+      </div>
+    </div>
+    <div class="goal-description">{{ goal.description }}</div>
+  
+    <div *ngIf="goal.children?.length" class="child-goals">
+      <div *ngFor="let child of goal.children" class="goal-card child-goal"
+           (click)="viewGoal(child); $event.stopPropagation()">
+        <div class="goal-header">
+          <div class="goal-title">- {{ child.title }}</div>
+          <div class="goal-actions">
+            <input type="date" [value]="formatDate(child.deadline)" disabled />
+          </div>
+        </div>
+        <div class="goal-description">{{ child.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>
